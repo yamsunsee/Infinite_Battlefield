@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply select-none;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-white/10;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-theme;
+    background-image: linear-gradient(
+      -45deg,
+      rgba(255, 255, 255, 0.2) 25%,
+      transparent 25%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0.2) 75%,
+      transparent 75%,
+      transparent
+    );
+  }
+}
+
+@layer components {
+  .button {
+    @apply flex justify-center rounded-3xl border-4 border-theme/50 bg-slate-900/50 px-8 py-4 font-bold uppercase tracking-widest text-white transition hover:border-theme hover:bg-gradient-to-r hover:from-theme/50 hover:to-indigo-500/50;
+  }
+
+  .button.small {
+    @apply px-4 py-2;
+  }
+
+  .button.stretch {
+    @apply w-full min-w-[12rem];
+  }
+
+  .button.disabled {
+    @apply cursor-wait border-gray-300 opacity-10 hover:bg-slate-900/50;
+  }
+
+  .input {
+    @apply w-full rounded-3xl border-4 border-theme/50 bg-slate-900/50 px-8 py-4 font-bold text-theme shadow-inner outline-none focus:border-theme;
+  }
+
+  .input:read-only {
+    @apply cursor-wait;
+  }
+
+  .player {
+    @apply relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-rival font-bold text-white;
+  }
+
+  .player.self {
+    @apply bg-self;
+  }
+
+  .playerName {
+    @apply absolute right-1/2 top-full hidden max-w-[20ch] translate-y-2 rounded-full bg-inherit px-4 py-1 text-white;
+  }
+
+  .playerName::before {
+    @apply absolute -top-2 right-2 -z-10 h-4 w-4 rotate-12 bg-inherit;
+    content: "";
+    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  }
+}
