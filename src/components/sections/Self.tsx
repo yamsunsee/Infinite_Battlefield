@@ -9,8 +9,8 @@ const Self: FC = () => {
 
   return (
     <div className="flex items-center justify-center overflow-y-auto border border-white/10 p-4 pl-12">
-      {self.deck.map((cardId) => (
-        <Card key={cardId} id={cardId} />
+      {self.deck.map((cardId, index) => (
+        <Card key={`${cardId}-${index}`} id={cardId} index={index} />
       ))}
     </div>
   );

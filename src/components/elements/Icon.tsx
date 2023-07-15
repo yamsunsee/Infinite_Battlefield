@@ -5,6 +5,7 @@ const Icon: FC<IconProps> = ({
   name,
   isLoading = false,
   isTruncate = false,
+  size = "NORMAL",
   children,
 }) => {
   return (
@@ -12,7 +13,7 @@ const Icon: FC<IconProps> = ({
       <span
         className={`material-symbols-rounded${
           isLoading ? " animate-spin" : ""
-        }`}
+        }${size === "LARGE" ? " text-4xl" : ""}`}
       >
         {isLoading ? "rotate_right" : name}
       </span>

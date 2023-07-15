@@ -1,7 +1,17 @@
 import { FC, useState } from "react";
 import Button from "../elements/Button";
+import Element from "../elements/Element";
+import { ElementId } from "../../types";
 
 const Control: FC = () => {
+  const [randomElements, setRandomElements] = useState<ElementId[]>([
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "E6",
+  ]);
   const [isShowOverlay, setIsShowOverlay] = useState(false);
 
   const handleDraw = () => {
@@ -19,8 +29,18 @@ const Control: FC = () => {
       {isShowOverlay && (
         <div
           onClick={() => setIsShowOverlay(false)}
-          className="fixed inset-0 z-50 bg-gradient-radial from-black/50 to-black"
-        ></div>
+          className="fixed inset-0 z-50 flex min-h-screen flex-col items-center justify-center bg-gradient-radial from-black/50 to-black"
+        >
+          <div className="flex gap-4">
+            {randomElements.map((elementId, index) => (
+              <Element
+                key={`${elementId}-${index}`}
+                id={elementId}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
       )}
     </>
   );

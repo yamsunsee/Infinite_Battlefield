@@ -3,7 +3,7 @@ import { State, Action, Context, COLOR } from "../types";
 
 const initialState: State = {
   self: {
-    deck: ["C1", "C2", "C3"],
+    deck: ["C1", "C1", "C2", "C3", "C1", "C2", "C3", "C1", "C2", "C3"],
     wealth: 2000,
   },
   rival: {
@@ -22,9 +22,35 @@ const initialState: State = {
   },
   messages: [],
   draggingCard: null,
+  elements: {
+    E1: {
+      name: "Handyman",
+      color: COLOR.GRAY,
+    },
+    E2: {
+      name: "Forest",
+      color: COLOR.GREEN,
+    },
+    E3: {
+      name: "Waves",
+      color: COLOR.BLUE,
+    },
+    E4: {
+      name: "Local_fire_department",
+      color: COLOR.RED,
+    },
+    E5: {
+      name: "Public",
+      color: COLOR.AMBER,
+    },
+    E6: {
+      name: "Switch_access",
+      color: COLOR.INDIGO,
+    },
+  },
   cards: {
     C1: { name: "Card 1", price: 200, color: COLOR.RED },
-    C2: { name: "Card 2", price: 200, color: COLOR.YELLOW },
+    C2: { name: "Card 2", price: 200, color: COLOR.AMBER },
     C3: { name: "Card 3", price: 300, color: COLOR.BLUE },
   },
   dropzones: {
@@ -59,7 +85,7 @@ const initialState: State = {
     },
     D3: {
       name: "Dropzone 3",
-      color: COLOR.YELLOW,
+      color: COLOR.AMBER,
       status: 0,
       values: {
         C1: 1,
@@ -126,11 +152,14 @@ const storeReducer = (state: State, action: Action): State => {
       };
 
     case "SELF_DECK":
+      const newDeck = [...state.self.deck];
+      newDeck.splice(payload, 1);
+
       return {
         ...state,
         self: {
           ...state.self,
-          deck: state.self.deck.filter((cardId) => cardId !== payload),
+          deck: newDeck,
         },
       };
 
@@ -142,6 +171,7 @@ const storeReducer = (state: State, action: Action): State => {
 
     case "UPGRADE_DROPZONE":
       const { dropzoneId, status } = payload;
+
       return {
         ...state,
         dropzones: {

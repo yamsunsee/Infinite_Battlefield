@@ -31,17 +31,20 @@ const Dropzone: FC<DropzoneProps> = ({ id }) => {
 
   const handleDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    const cardId = event.dataTransfer.getData("text/plain") as CardId;
+
+    const string = event.dataTransfer.getData("text/plain");
+    const { cardId, cardIndex } = JSON.parse(string) as {
+      cardId: CardId;
+      cardIndex: number;
+    };
 
     if (allowedCardIds.includes(cardId)) {
       const newStatus = values[cardId] as number;
-      console.log(newStatus);
-
       dispatch({
         type: "UPGRADE_DROPZONE",
         payload: { dropzoneId: id, status: newStatus },
       });
-      dispatch({ type: "SELF_DECK", payload: cardId });
+      dispatch({ type: "SELF_DECK", payload: cardIndex });
     }
     setIsDragOver(false);
   };

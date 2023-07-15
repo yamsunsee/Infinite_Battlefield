@@ -9,8 +9,13 @@ const Rival: FC = () => {
 
   return (
     <div className="flex items-center justify-center overflow-y-auto border border-white/10 p-4 pl-12">
-      {rival.deck.map((cardId) => (
-        <Card key={cardId} id={cardId} isDraggable={false} />
+      {rival.deck.map((cardId, index) => (
+        <Card
+          key={`${cardId}-${index}`}
+          id={cardId}
+          index={index}
+          isDraggable={false}
+        />
       ))}
     </div>
   );
