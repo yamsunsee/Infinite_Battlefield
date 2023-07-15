@@ -39,7 +39,7 @@ const Game = () => {
           ))}
         </div>
       </div>
-      <div className="flex w-48 flex-col items-center justify-center border border-white/10 backdrop-blur-3xl">
+      <div className="flex w-48 flex-col items-center justify-center border border-white/10 p-4 backdrop-blur-3xl">
         <Button action={handleDraw} name="joystick" size="SMALL">
           Draw
         </Button>

@@ -105,7 +105,7 @@ const Chat: FC<ChatProps> = ({ isCollapse, toggleCollapse }) => {
               ))}
               <div className="group relative flex cursor-pointer items-center text-slate-400">
                 <Icon name="more_vert" />
-                <div className="absolute right-0 top-full z-10 hidden translate-y-2 flex-col gap-4 border border-white/10 bg-slate-900/80 p-4 before:absolute before:bottom-full before:left-0 before:h-12 before:w-full group-hover:flex">
+                <div className="absolute right-0 top-full z-10 hidden translate-y-2 flex-col gap-4 rounded-3xl border border-white/10 bg-slate-900/80 p-4 before:absolute before:bottom-full before:left-0 before:h-12 before:w-full group-hover:flex">
                   <Button
                     action={handleCollapse}
                     name="left_panel_close"
@@ -174,7 +174,7 @@ const Chat: FC<ChatProps> = ({ isCollapse, toggleCollapse }) => {
               size="SMALL"
               stretch={true}
             >
-              {isNotice ? "NOTICE [ON]" : "NOTICE [OFF]"}
+              {isNotice ? "Mute" : "Unmute"}
             </Button>
           </div>
         </div>

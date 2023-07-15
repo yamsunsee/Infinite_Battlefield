@@ -19,6 +19,7 @@ const App = () => {
         autoClose={3000}
         pauseOnFocusLoss={false}
         limit={3}
+        theme="dark"
         style={{ width: "fit-content", minWidth: "20rem" }}
       />
     </>
