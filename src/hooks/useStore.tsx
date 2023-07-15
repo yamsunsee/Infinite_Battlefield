@@ -7,7 +7,7 @@ const initialState: State = {
     wealth: 2000,
   },
   rival: {
-    deck: [],
+    deck: ["C1", "C2", "C3"],
     wealth: 2000,
   },
   socket: null,
@@ -21,6 +21,7 @@ const initialState: State = {
     players: [],
   },
   messages: [],
+  draggingCard: null,
   cards: {
     C1: { name: "Card 1", price: 200, color: COLOR.RED },
     C2: { name: "Card 2", price: 200, color: COLOR.YELLOW },
@@ -30,68 +31,92 @@ const initialState: State = {
     D1: {
       name: "Dropzone 1",
       color: COLOR.BLUE,
-      level: 0,
+      status: 0,
+      values: {
+        C1: 1,
+        C2: 2,
+        C3: 2,
+      },
       allowedCardIds: {
         0: ["C1"],
         1: ["C2", "C3"],
+        2: [],
       },
     },
     D2: {
       name: "Dropzone 2",
       color: COLOR.RED,
-      level: 0,
+      status: 0,
+      values: {
+        C1: 1,
+        C2: 1,
+        C3: 1,
+      },
       allowedCardIds: {
         0: ["C1", "C2", "C3"],
+        1: [],
       },
     },
     D3: {
       name: "Dropzone 3",
       color: COLOR.YELLOW,
-      level: 0,
+      status: 0,
+      values: {
+        C1: 1,
+        C2: 2,
+        C3: 2,
+      },
       allowedCardIds: {
-        0: ["C1", "C2", "C3"],
+        0: ["C1"],
+        1: ["C2"],
+        2: ["C3"],
+        3: [],
       },
     },
     D4: {
       name: "Dropzone 4",
       color: COLOR.BLUE,
-      level: 0,
+      status: 0,
+      values: {
+        C2: 1,
+        C3: 2,
+      },
       allowedCardIds: {
         0: ["C2"],
         1: ["C3"],
+        2: [],
       },
     },
   },
 };
 
 const storeReducer = (state: State, action: Action): State => {
-  switch (action.type) {
+  const { type, payload } = action;
+
+  switch (type) {
     case "SOCKET":
       return {
         ...state,
-        socket: action.payload,
+        socket: payload,
       };
 
     case "FORM":
-      sessionStorage.setItem(
-        "INFINITE_BATTLEFIELD",
-        JSON.stringify(action.payload)
-      );
+      sessionStorage.setItem("INFINITE_BATTLEFIELD", JSON.stringify(payload));
       return {
         ...state,
-        form: action.payload,
+        form: payload,
       };
 
     case "ROOM":
       return {
         ...state,
-        room: action.payload,
+        room: payload,
       };
 
     case "CHAT":
       return {
         ...state,
-        messages: [action.payload, ...state.messages],
+        messages: [payload, ...state.messages],
       };
 
     case "CLEAR_CHAT":
@@ -105,7 +130,26 @@ const storeReducer = (state: State, action: Action): State => {
         ...state,
         self: {
           ...state.self,
-          deck: state.self.deck.filter((cardId) => cardId !== action.payload),
+          deck: state.self.deck.filter((cardId) => cardId !== payload),
+        },
+      };
+
+    case "DRAGGING_CARD":
+      return {
+        ...state,
+        draggingCard: payload,
+      };
+
+    case "UPGRADE_DROPZONE":
+      const { dropzoneId, status } = payload;
+      return {
+        ...state,
+        dropzones: {
+          ...state.dropzones,
+          [dropzoneId]: {
+            ...state.dropzones[dropzoneId],
+            status: status,
+          },
         },
       };
 

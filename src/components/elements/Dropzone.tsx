@@ -2,14 +2,13 @@ import { FC, DragEvent, useState } from "react";
 import { CardId, DropzoneProps } from "../../types";
 import useStore from "../../hooks/useStore";
 
-const Dropzone: FC<DropzoneProps> = ({ id, draggingCard }) => {
+const Dropzone: FC<DropzoneProps> = ({ id }) => {
   const {
-    state: { cards, dropzones },
+    state: { draggingCard, dropzones },
     dispatch,
   } = useStore();
-  const { name, level } = dropzones[id];
-  const allowedCardIds = dropzones[id].allowedCardIds[level];
-  const [values, setValues] = useState<CardId[]>([]);
+  const { name, values, status } = dropzones[id];
+  const allowedCardIds = dropzones[id].allowedCardIds[status];
   const [isDragOver, setIsDragOver] = useState(false);
   const [isCanDrop, setIsCanDrop] = useState(true);
 
@@ -35,7 +34,13 @@ const Dropzone: FC<DropzoneProps> = ({ id, draggingCard }) => {
     const cardId = event.dataTransfer.getData("text/plain") as CardId;
 
     if (allowedCardIds.includes(cardId)) {
-      setValues([...values, cardId]);
+      const newStatus = values[cardId] as number;
+      console.log(newStatus);
+
+      dispatch({
+        type: "UPGRADE_DROPZONE",
+        payload: { dropzoneId: id, status: newStatus },
+      });
       dispatch({ type: "SELF_DECK", payload: cardId });
     }
     setIsDragOver(false);
@@ -56,8 +61,7 @@ const Dropzone: FC<DropzoneProps> = ({ id, draggingCard }) => {
     >
       <div className="font-bold text-white">
         <div>{name}</div>
-        <div>Level: {level}</div>
-        <div>{values.map((cardId) => cards[cardId].name).join(", ")}</div>
+        <div>Status: {status}</div>
       </div>
     </div>
   );

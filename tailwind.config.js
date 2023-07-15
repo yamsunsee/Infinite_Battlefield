@@ -9,6 +9,9 @@ export default {
         self: "#f87171",
         rival: "#fb923c",
       },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      },
     },
   },
   plugins: [],

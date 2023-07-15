@@ -75,9 +75,7 @@ const Chat: FC<ChatProps> = ({ isCollapse, toggleCollapse }) => {
 
   const handleNotice = () => setIsNotice(!isNotice);
 
-  const handleClearChat = () => {
-    dispatch({ type: "CLEAR_CHAT" });
-  };
+  const handleClearChat = () => dispatch({ type: "CLEAR_CHAT" });
 
   const handleLeave = () => {
     navigate("/login");
@@ -105,7 +103,7 @@ const Chat: FC<ChatProps> = ({ isCollapse, toggleCollapse }) => {
               ))}
               <div className="group relative flex cursor-pointer items-center text-slate-400">
                 <Icon name="more_vert" />
-                <div className="absolute right-0 top-full z-10 hidden translate-y-2 flex-col gap-4 rounded-3xl border border-white/10 bg-slate-900/80 p-4 before:absolute before:bottom-full before:left-0 before:h-12 before:w-full group-hover:flex">
+                <div className="absolute right-0 top-full z-10 hidden translate-y-2 flex-col gap-4 rounded-3xl border border-white/10 bg-slate-900/80 p-4 before:absolute before:-top-4 before:right-0 before:h-8 before:w-8 group-hover:flex">
                   <Button
                     action={handleCollapse}
                     name="left_panel_close"

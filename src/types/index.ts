@@ -25,7 +25,8 @@ export type DropzoneId = "D1" | "D2" | "D3" | "D4";
 type Dropzone = {
   name: string;
   color: COLOR;
-  level: number;
+  status: number;
+  values: Partial<Record<CardId, number>>;
   allowedCardIds: Record<number, CardId[]>;
 };
 
@@ -59,6 +60,7 @@ export type State = {
   form: Form;
   room: Room;
   messages: Message[];
+  draggingCard: CardId | null;
   cards: Record<CardId, Card>;
   dropzones: Record<DropzoneId, Dropzone>;
 };
@@ -68,8 +70,13 @@ export type Action =
   | { type: "FORM"; payload: Form }
   | { type: "ROOM"; payload: Room }
   | { type: "CHAT"; payload: Message }
-  | { type: "CLEAR_CHAT" }
-  | { type: "SELF_DECK"; payload: CardId };
+  | { type: "CLEAR_CHAT"; payload?: never }
+  | { type: "SELF_DECK"; payload: CardId }
+  | { type: "DRAGGING_CARD"; payload: CardId }
+  | {
+      type: "UPGRADE_DROPZONE";
+      payload: { dropzoneId: DropzoneId; status: number };
+    };
 
 export type Context = {
   state: State;
@@ -110,10 +117,8 @@ export type ChatProps = {
 export type CardProps = {
   id: CardId;
   isDraggable?: boolean;
-  onDragStart: (cardId: CardId) => void;
 };
 
 export type DropzoneProps = {
   id: DropzoneId;
-  draggingCard: CardId | null;
 };
