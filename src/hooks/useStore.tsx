@@ -23,6 +23,10 @@ const initialState: State = {
   messages: [],
   draggingCard: null,
   elements: {
+    E0: {
+      name: "Question_mark",
+      color: COLOR.GRAY,
+    },
     E1: {
       name: "Handyman",
       color: COLOR.GRAY,

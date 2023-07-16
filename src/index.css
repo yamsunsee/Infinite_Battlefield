@@ -72,4 +72,15 @@
     content: "";
     clip-path: polygon(100% 0, 0% 100%, 100% 100%);
   }
+
+  .sidebar {
+    display: grid;
+    max-width: 20rem;
+    grid-template-columns: 0fr;
+    transition: grid-template-columns 0.3s;
+  }
+
+  .sidebar.expand {
+    grid-template-columns: 1fr;
+  }
 }

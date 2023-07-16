@@ -9,13 +9,13 @@ const Icon: FC<IconProps> = ({
   children,
 }) => {
   return (
-    <div className="flex items-center gap-1">
+    <div className={`flex items-center ${isLoading ? "gap-2" : "gap-1"}`}>
       <span
         className={`material-symbols-rounded${
           isLoading ? " animate-spin" : ""
         }${size === "LARGE" ? " text-4xl" : ""}`}
       >
-        {isLoading ? "rotate_right" : name}
+        {isLoading ? "progress_activity" : name}
       </span>
       {children && (
         <div

@@ -142,8 +142,8 @@ const MainLayout = () => {
     <>
       {form.serverUrl && (
         <div
-          className={`grid h-screen gap-4 bg-[url('/images/background.jpg')] bg-cover bg-no-repeat p-4 ${
-            isCollapse ? "grid-cols-1" : "grid-cols-[20rem_1fr]"
+          className={`flex h-screen bg-[url('/images/background.jpg')] bg-cover bg-no-repeat p-4 ${
+            !isCollapse ? " gap-4" : ""
           }`}
         >
           <Chat isCollapse={isCollapse} toggleCollapse={setIsCollapse} />

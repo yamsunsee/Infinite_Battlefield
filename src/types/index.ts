@@ -15,7 +15,7 @@ type Player = {
   name: string;
 };
 
-export type ElementId = "E1" | "E2" | "E3" | "E4" | "E5" | "E6";
+export type ElementId = "E0" | "E1" | "E2" | "E3" | "E4" | "E5" | "E6";
 
 type Element = {
   name: string;
@@ -128,7 +128,13 @@ export type ChatProps = {
 
 export type ElementDrops = {
   id: ElementId;
-  index: number;
+};
+
+export type SlotDrops = {
+  elements: ElementId[];
+  order: number;
+  isReroll: boolean;
+  completed: () => void;
 };
 
 export type CardProps = {

@@ -4,36 +4,34 @@ import useStore from "../../hooks/useStore";
 import { ElementId, ElementDrops } from "../../types";
 import Icon from "./Icon";
 
-const Element: FC<ElementDrops> = ({ id, index }) => {
+const Element: FC<ElementDrops> = ({ id }) => {
   const {
     state: { elements },
   } = useStore();
   const element = elements[id as ElementId];
   const elementRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    gsap.fromTo(
-      elementRef.current,
-      {
-        y: -400,
-        scale: 0,
-        opacity: 0,
-      },
-      {
-        y: -200,
-        scale: 1,
-        opacity: 1,
-        duration: 1,
-        rotateY: 360,
-        perspective: 1000,
-        ease: Circ.easeOut,
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   gsap.fromTo(
+  //     elementRef.current,
+  //     {
+  //       y: -400,
+  //       scale: 0,
+  //       opacity: 0,
+  //     },
+  //     {
+  //       y: -200,
+  //       scale: 1,
+  //       opacity: 1,
+  //       duration: 1,
+  //       rotateY: 360,
+  //       perspective: 1000,
+  //       ease: Circ.easeOut,
+  //     }
+  //   );
+  // }, []);
 
-  const handleClick = (event: MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-
+  const handleClick = () => {
     const targetElement = elementRef.current as HTMLDivElement;
     const {
       offsetLeft: elementX,
@@ -64,7 +62,6 @@ const Element: FC<ElementDrops> = ({ id, index }) => {
   return (
     <div
       ref={elementRef}
-      onClick={handleClick}
       className={`flex h-32 w-32 flex-col items-center justify-center gap-4 rounded-2xl border-4 border-white/50 p-4 font-bold text-white backdrop-blur-3xl ${element.color}`}
     >
       <Icon name={element.name} size="LARGE" />

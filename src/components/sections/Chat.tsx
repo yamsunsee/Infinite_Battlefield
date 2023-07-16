@@ -85,8 +85,8 @@ const Chat: FC<ChatProps> = ({ isCollapse, toggleCollapse }) => {
 
   return (
     <>
-      {!isCollapse ? (
-        <div className="flex w-full flex-col gap-4 overflow-hidden">
+      <div className={`sidebar${!isCollapse ? " expand" : ""}`}>
+        <div className="flex flex-col gap-4 overflow-hidden">
           <div className="z-10 flex items-center justify-between border border-white/10 p-4 backdrop-blur-3xl">
             <div className="text-2xl font-bold text-theme">
               <Icon name="meeting_room" isTruncate={true}>
@@ -103,7 +103,7 @@ const Chat: FC<ChatProps> = ({ isCollapse, toggleCollapse }) => {
               ))}
               <div className="group relative flex cursor-pointer items-center text-slate-400">
                 <Icon name="more_vert" />
-                <div className="absolute right-0 top-full z-10 hidden translate-y-2 flex-col gap-4 rounded-3xl border border-white/10 bg-slate-900/80 p-4 before:absolute before:-top-4 before:right-0 before:h-8 before:w-8 group-hover:flex">
+                <div className="absolute right-0 top-full z-10 hidden translate-y-2 flex-col gap-4 rounded-3xl border border-white/10 bg-slate-900/80 p-4 before:absolute before:-top-10 before:right-0 before:h-14 before:w-8 group-hover:flex">
                   <Button
                     action={handleCollapse}
                     name="left_panel_close"
@@ -155,7 +155,8 @@ const Chat: FC<ChatProps> = ({ isCollapse, toggleCollapse }) => {
             <Button name="send" />
           </form>
         </div>
-      ) : (
+      </div>
+      {isCollapse && (
         <div className="fixed left-0 top-0 h-screen translate-x-[calc(1rem-100%)] border-white/10 p-4 transition-all ease-out hover:translate-x-0 hover:border-l hover:bg-slate-900/80">
           <div className="flex h-full flex-col items-center justify-center gap-4">
             <Button
