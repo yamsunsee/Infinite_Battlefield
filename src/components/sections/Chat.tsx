@@ -89,7 +89,7 @@ const Chat: FC<ChatProps> = ({ isCollapse, toggleCollapse }) => {
         <div className="flex flex-col gap-4 overflow-hidden">
           <div className="z-10 flex items-center justify-between border border-white/10 p-4 backdrop-blur-3xl">
             <div className="text-2xl font-bold text-theme">
-              <Icon name="meeting_room" isTruncate={true}>
+              <Icon name="meeting_room" isTruncate={true} copyable={true}>
                 {form.roomId}
               </Icon>
             </div>
@@ -101,8 +101,10 @@ const Chat: FC<ChatProps> = ({ isCollapse, toggleCollapse }) => {
                   isSelf={player.name === form.playerName}
                 />
               ))}
-              <div className="group relative flex cursor-pointer items-center text-slate-400">
-                <Icon name="more_vert" />
+              <div className="group relative flex cursor-pointer items-center text-slate-400 hover:text-white">
+                <div className="-mr-2">
+                  <Icon name="more_vert" />
+                </div>
                 <div className="absolute right-0 top-full z-10 hidden translate-y-2 flex-col gap-4 rounded-3xl border border-white/10 bg-slate-900/80 p-4 before:absolute before:-top-10 before:right-0 before:h-14 before:w-8 group-hover:flex">
                   <Button
                     action={handleCollapse}

@@ -99,6 +99,7 @@ export type IconProps = {
   isLoading?: boolean;
   isTruncate?: boolean;
   size?: "NORMAL" | "LARGE";
+  copyable?: boolean;
   children?: ReactNode;
 };
 
