@@ -11,7 +11,7 @@ const Login = () => {
   const navigate = useNavigate();
   const { dispatch } = useStore();
   const [form, setForm] = useState<Form>({
-    serverUrl: "http://localhost:5000",
+    serverUrl: "",
     playerName: "",
     roomId: "",
   });
@@ -35,6 +35,9 @@ const Login = () => {
 
     const socket = io(form.serverUrl, {
       transports: ["websocket", "polling"],
+      extraHeaders: {
+        "ngrok-skip-browser-warning": "false",
+      },
     });
 
     const toastId = toast(<Icon isLoading>Connecting to the server...</Icon>, {

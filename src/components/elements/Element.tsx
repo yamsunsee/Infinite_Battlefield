@@ -1,5 +1,4 @@
-import { gsap, Circ } from "gsap";
-import { FC, useRef, useEffect, MouseEvent } from "react";
+import { FC, useRef } from "react";
 import useStore from "../../hooks/useStore";
 import { ElementId, ElementDrops } from "../../types";
 import Icon from "./Icon";
@@ -31,33 +30,33 @@ const Element: FC<ElementDrops> = ({ id }) => {
   //   );
   // }, []);
 
-  const handleClick = () => {
-    const targetElement = elementRef.current as HTMLDivElement;
-    const {
-      offsetLeft: elementX,
-      offsetTop: elementY,
-      offsetHeight: elementHeight,
-      offsetWidth: elementWidth,
-    } = targetElement;
-    const { innerWidth: screenWidth, innerHeight: screenHeight } = window;
+  // const handleClick = () => {
+  //   const targetElement = elementRef.current as HTMLDivElement;
+  //   const {
+  //     offsetLeft: elementX,
+  //     offsetTop: elementY,
+  //     offsetHeight: elementHeight,
+  //     offsetWidth: elementWidth,
+  //   } = targetElement;
+  //   const { innerWidth: screenWidth, innerHeight: screenHeight } = window;
 
-    const x = screenWidth / 2 - elementWidth / 2 - elementX;
-    const y = screenHeight / 2 - elementHeight / 2 - elementY;
+  //   const x = screenWidth / 2 - elementWidth / 2 - elementX;
+  //   const y = screenHeight / 2 - elementHeight / 2 - elementY;
 
-    const handleAnimationComplete = () => {
-      setTimeout(() => {
-        console.log("Done");
-      }, 500);
-    };
+  //   const handleAnimationComplete = () => {
+  //     setTimeout(() => {
+  //       console.log("Done");
+  //     }, 500);
+  //   };
 
-    gsap.to(targetElement, {
-      x,
-      y,
-      duration: 1,
-      ease: Circ.easeOut,
-      onComplete: handleAnimationComplete,
-    });
-  };
+  //   gsap.to(targetElement, {
+  //     x,
+  //     y,
+  //     duration: 1,
+  //     ease: Circ.easeOut,
+  //     onComplete: handleAnimationComplete,
+  //   });
+  // };
 
   return (
     <div
