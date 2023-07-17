@@ -34,7 +34,6 @@ const Login = () => {
     setIsLoading(true);
 
     const socket = io(form.serverUrl, {
-      transports: ["websocket", "polling"],
       extraHeaders: {
         "ngrok-skip-browser-warning": "false",
       },
