@@ -70,7 +70,9 @@ const MainLayout = () => {
         const localForm = JSON.parse(localData);
 
         const newSocket = io(localForm.serverUrl, {
-          transports: ["websocket", "polling"],
+          extraHeaders: {
+            "ngrok-skip-browser-warning": "false",
+          },
         });
 
         const toastId = toast(
