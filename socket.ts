@@ -1,11 +1,21 @@
 import http from "http";
 import socketIO from "socket.io";
+import dotenv from "dotenv";
 import Rooms from "./rooms.ts";
+
+dotenv.config();
+const isProduction = process.env.PRODUCTION === "true";
+const DEVELOPMENT_URL = process.env.DEVELOPMENT_URL as string;
+const PRODUCTION_URL = process.env.PRODUCTION_URL as string;
 
 const rooms = new Rooms();
 
 const socket = (server: http.Server) => {
-  const io = new socketIO.Server(server);
+  const io = new socketIO.Server(server, {
+    cors: {
+      origin: isProduction ? PRODUCTION_URL : DEVELOPMENT_URL,
+    },
+  });
 
   io.on("connection", (socket) => {
     socket.on("SERVER", (action) => {
