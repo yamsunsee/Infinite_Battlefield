@@ -19,19 +19,11 @@ server.listen(process.env.PORT, () => {
   const isProduction = process.env.PRODUCTION === "true";
   console.log(process.env.PRODUCTION);
 
-  console.log(
-    `Server is running on ${
-      isProduction ? "production" : "development"
-    } environment`
-  );
-  console.log(
-    `Server is running on URL [http://localhost:${process.env.PORT}]`
-  );
+  console.log(`Server is running on ${isProduction ? "production" : "development"} environment`);
+  console.log(`Server is running on URL [http://localhost:${process.env.PORT}]`);
   console.log(
     `Server is listening from client URL ${
-      isProduction
-        ? `[${process.env.PRODUCTION_URL}]`
-        : `[${process.env.DEVELOPMENT_URL}]`
+      isProduction ? `[${process.env.PRODUCTION_URL}]` : `[${process.env.DEVELOPMENT_URL}]`
     }`
   );
 });
