@@ -54,17 +54,14 @@ const Dropzone: FC<DropzoneProps> = ({ id }) => {
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
-      className={`flex-1 rounded-2xl border-4 p-4 border-dashed${
-        isDragOver
-          ? isCanDrop
-            ? " border-blue-500"
-            : " border-red-500"
-          : " border-white/10"
+      className={`flex-1 rounded-2xl border-4 p-4 backdrop-blur-3xl${
+        isDragOver ? (isCanDrop ? " border-blue-500" : " border-red-500") : " border-white/10"
       }`}
     >
       <div className="font-bold text-white">
         <div>{name}</div>
         <div>Status: {status}</div>
+        <div>Valid cards: {allowedCardIds.length > 0 ? allowedCardIds.join(", ") : "None"}</div>
       </div>
     </div>
   );

@@ -3,15 +3,18 @@ import { ElementId } from "../../types";
 import Button from "../elements/Button";
 import Slot from "../elements/Slot";
 import Element from "../elements/Element";
+import useStore from "../../hooks/useStore";
+import Card from "../elements/Card";
 
 const Control: FC = () => {
+  const {
+    state: { elements },
+  } = useStore();
   const [slots, setSlots] = useState<ElementId[][]>([]);
   const [isShowOverlay, setIsShowOverlay] = useState(false);
   const [isReroll, setIsReroll] = useState(false);
   const [isCompleted, setIsCompleted] = useState(false);
-  const [results, setResults] = useState<{ level: number; element: ElementId }>(
-    { level: 0, element: "E0" }
-  );
+  const [results, setResults] = useState<{ level: number; element: ElementId }>({ level: 0, element: "E0" });
 
   useEffect(() => {
     if (!isReroll && !isShowOverlay) return;
@@ -43,8 +46,7 @@ const Control: FC = () => {
 
       case 2:
         const [first, second, third] = lastElements;
-        if (first === second || first === third)
-          results = { level: 1, element: first };
+        if (first === second || first === third) results = { level: 1, element: first };
         else results = { level: 1, element: second };
         break;
 
@@ -76,7 +78,7 @@ const Control: FC = () => {
 
   return (
     <>
-      <div className="flex w-48 flex-col items-center justify-center border border-white/10 p-4 backdrop-blur-3xl">
+      <div className="flex w-48 flex-col items-center justify-center rounded-3xl border border-white/10 p-4 backdrop-blur-3xl">
         <Button action={handleDraw} name="joystick" size="SMALL">
           Draw
         </Button>
@@ -99,19 +101,16 @@ const Control: FC = () => {
               <Element id={results.element} />
               {results.level === 2 && <Element id="E0" />}
             </div>
+            <div className="flex h-48 items-center justify-center gap-4 rounded-3xl border-4 border-white/10 p-4">
+              {elements[results.element].deck.map((cardId, index) => (
+                <Card key={`${cardId}-${index}`} id={cardId} />
+              ))}
+            </div>
             <div className="flex justify-around gap-4">
-              <Button
-                name="close"
-                action={() => setIsShowOverlay(false)}
-                disabled={!isCompleted}
-              >
+              <Button name="close" action={() => setIsShowOverlay(false)} disabled={!isCompleted}>
                 Close
               </Button>
-              <Button
-                name="restart_alt"
-                action={handleReroll}
-                disabled={!isCompleted}
-              >
+              <Button name="restart_alt" action={handleReroll} disabled={!isCompleted}>
                 Reroll
               </Button>
             </div>

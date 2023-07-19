@@ -3,11 +3,11 @@ import { State, Action, Context, COLOR } from "../types";
 
 const initialState: State = {
   self: {
-    deck: ["C1", "C1", "C2", "C3", "C1", "C2", "C3", "C1", "C2", "C3"],
+    deck: ["C1", "C1", "C2", "C8", "C4", "C5", "C3", "C6", "C7", "C8"],
     wealth: 2000,
   },
   rival: {
-    deck: ["C1", "C2", "C3"],
+    deck: ["C1", "C1", "C2", "C8", "C4", "C5", "C3", "C6", "C7", "C8"],
     wealth: 2000,
   },
   socket: null,
@@ -26,36 +26,48 @@ const initialState: State = {
     E0: {
       name: "Question_mark",
       color: COLOR.GRAY,
+      deck: [],
     },
     E1: {
       name: "Handyman",
       color: COLOR.GRAY,
+      deck: ["C1", "C7"],
     },
     E2: {
       name: "Forest",
       color: COLOR.GREEN,
+      deck: ["C1", "C2"],
     },
     E3: {
       name: "Waves",
       color: COLOR.BLUE,
+      deck: ["C1", "C2", "C3", "C4", "C5"],
     },
     E4: {
       name: "Local_fire_department",
       color: COLOR.RED,
+      deck: ["C5", "C6", "C7"],
     },
     E5: {
       name: "Public",
       color: COLOR.AMBER,
+      deck: ["C7", "C8"],
     },
     E6: {
       name: "Switch_access",
       color: COLOR.INDIGO,
+      deck: ["C4", "C5", "C5", "C6"],
     },
   },
   cards: {
-    C1: { name: "Card 1", price: 200, color: COLOR.RED },
+    C1: { name: "Card 1", price: 175, color: COLOR.RED },
     C2: { name: "Card 2", price: 200, color: COLOR.AMBER },
     C3: { name: "Card 3", price: 300, color: COLOR.BLUE },
+    C4: { name: "Card 4", price: 50, color: COLOR.RED },
+    C5: { name: "Card 5", price: 150, color: COLOR.AMBER },
+    C6: { name: "Card 6", price: 500, color: COLOR.BLUE },
+    C7: { name: "Card 7", price: 75, color: COLOR.RED },
+    C8: { name: "Card 8", price: 400, color: COLOR.AMBER },
   },
   dropzones: {
     D1: {
@@ -105,6 +117,65 @@ const initialState: State = {
     },
     D4: {
       name: "Dropzone 4",
+      color: COLOR.BLUE,
+      status: 0,
+      values: {
+        C2: 1,
+        C3: 2,
+      },
+      allowedCardIds: {
+        0: ["C2"],
+        1: ["C3"],
+        2: [],
+      },
+    },
+    D5: {
+      name: "Dropzone 5",
+      color: COLOR.BLUE,
+      status: 0,
+      values: {
+        C1: 1,
+        C2: 2,
+        C3: 2,
+      },
+      allowedCardIds: {
+        0: ["C1"],
+        1: ["C2", "C3"],
+        2: [],
+      },
+    },
+    D6: {
+      name: "Dropzone 6",
+      color: COLOR.RED,
+      status: 0,
+      values: {
+        C1: 1,
+        C2: 1,
+        C3: 1,
+      },
+      allowedCardIds: {
+        0: ["C1", "C2", "C3"],
+        1: [],
+      },
+    },
+    D7: {
+      name: "Dropzone 7",
+      color: COLOR.AMBER,
+      status: 0,
+      values: {
+        C1: 1,
+        C2: 2,
+        C3: 2,
+      },
+      allowedCardIds: {
+        0: ["C1"],
+        1: ["C2"],
+        2: ["C3"],
+        3: [],
+      },
+    },
+    D8: {
+      name: "Dropzone 8",
       color: COLOR.BLUE,
       status: 0,
       values: {
@@ -198,11 +269,7 @@ const useStore = () => useContext(StoreContext);
 const StoreProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [state, dispatch] = useReducer(storeReducer, initialState);
 
-  return (
-    <StoreContext.Provider value={{ state, dispatch }}>
-      {children}
-    </StoreContext.Provider>
-  );
+  return <StoreContext.Provider value={{ state, dispatch }}>{children}</StoreContext.Provider>;
 };
 
 export { StoreProvider };

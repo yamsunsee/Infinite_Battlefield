@@ -1,9 +1,9 @@
 import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import useStore from "../hooks/useStore";
 import Chat from "../components/sections/Chat";
-import { toast } from "react-toastify";
 import Icon from "../components/elements/Icon";
 
 const MainLayout = () => {
@@ -75,12 +75,9 @@ const MainLayout = () => {
           },
         });
 
-        const toastId = toast(
-          <Icon isLoading>Reconnecting to the server...</Icon>,
-          {
-            autoClose: false,
-          }
-        );
+        const toastId = toast(<Icon isLoading>Reconnecting to the server...</Icon>, {
+          autoClose: false,
+        });
 
         newSocket.on("connect_error", () => {
           toast.update(toastId, {

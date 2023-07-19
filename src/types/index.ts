@@ -20,9 +20,10 @@ export type ElementId = "E0" | "E1" | "E2" | "E3" | "E4" | "E5" | "E6";
 type Element = {
   name: string;
   color: COLOR;
+  deck: CardId[];
 };
 
-export type CardId = "C1" | "C2" | "C3";
+export type CardId = "C1" | "C2" | "C3" | "C4" | "C5" | "C6" | "C7" | "C8";
 
 type Card = {
   name: string;
@@ -30,7 +31,7 @@ type Card = {
   color: COLOR;
 };
 
-export type DropzoneId = "D1" | "D2" | "D3" | "D4";
+export type DropzoneId = "D1" | "D2" | "D3" | "D4" | "D5" | "D6" | "D7" | "D8";
 
 type Dropzone = {
   name: string;
@@ -140,8 +141,8 @@ export type SlotDrops = {
 
 export type CardProps = {
   id: CardId;
-  index: number;
-  isDraggable?: boolean;
+  index?: number;
+  type?: "DEFAULT" | "SELF" | "RIVAL";
 };
 
 export type DropzoneProps = {

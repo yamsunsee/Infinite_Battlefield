@@ -105,11 +105,9 @@ const Login = () => {
     <div className="flex min-h-screen flex-col items-center justify-center bg-[url('/images/background.jpg')] bg-cover bg-no-repeat">
       <form
         onSubmit={handleSubmit}
-        className="flex h-[50rem] w-[40rem] flex-col justify-between border border-white/10 p-20 backdrop-blur-3xl before:absolute before:left-0 before:top-0 before:h-2 before:w-full before:bg-gradient-to-r before:from-theme before:via-indigo-500 before:to-red-300"
+        className="flex h-[50rem] w-[40rem] flex-col justify-between rounded-b-3xl border border-white/10 p-20 backdrop-blur-3xl before:absolute before:left-0 before:top-0 before:h-2 before:w-full before:bg-gradient-to-r before:from-theme before:via-indigo-500 before:to-red-300"
       >
-        <h1 className="text-center text-6xl font-bold uppercase text-theme">
-          Infinite Battlefield
-        </h1>
+        <h1 className="text-center text-6xl font-bold uppercase text-theme">Infinite Battlefield</h1>
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-2">
             <label htmlFor="serverUrl" className="font-bold text-white">

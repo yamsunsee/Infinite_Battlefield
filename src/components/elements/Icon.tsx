@@ -23,26 +23,15 @@ const Icon: FC<IconProps> = ({
   return (
     <div
       onClick={handleCopy}
-      className={`flex items-center ${isLoading ? "gap-2" : "gap-1"}${
-        copyable ? " cursor-pointer" : ""
-      }`}
+      title={copyable ? "Click to copy" : ""}
+      className={`flex items-center ${isLoading ? "gap-2" : "gap-1"}${copyable ? " cursor-pointer" : ""}`}
     >
       <span
-        className={`material-symbols-rounded${
-          isLoading ? " animate-spin" : ""
-        }${size === "LARGE" ? " text-4xl" : ""}`}
+        className={`material-symbols-rounded${isLoading ? " animate-spin" : ""}${size === "LARGE" ? " text-4xl" : ""}`}
       >
         {isLoading ? "progress_activity" : name}
       </span>
-      {children && (
-        <div
-          className={`whitespace-nowrap${
-            isTruncate ? " max-w-[10ch] truncate" : ""
-          }`}
-        >
-          {children}
-        </div>
-      )}
+      {children && <div className={`whitespace-nowrap${isTruncate ? " max-w-[10ch] truncate" : ""}`}>{children}</div>}
     </div>
   );
 };
