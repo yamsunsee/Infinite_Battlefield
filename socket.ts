@@ -22,11 +22,7 @@ const socket = (server: http.Server) => {
       const { type, payload } = action;
       switch (type) {
         case "JOIN_ROOM":
-          const { isSuccess, room } = rooms.addPlayerToRoom(
-            payload.roomId,
-            socket.id,
-            payload.playerName
-          );
+          const { isSuccess, room } = rooms.addPlayerToRoom(payload.roomId, socket.id, payload.playerName);
           if (isSuccess) {
             socket.join(payload.roomId);
             io.to(payload.roomId).emit("CLIENT", {
@@ -41,8 +37,7 @@ const socket = (server: http.Server) => {
             io.to(socket.id).emit("CLIENT", {
               type: "ERRORS",
               payload: {
-                message:
-                  "The room you selected is full! Please choose another room!",
+                message: "The room you selected is full! Please choose another room!",
               },
             });
           }
@@ -61,7 +56,7 @@ const socket = (server: http.Server) => {
           socket.to(payload.roomId).emit("CLIENT", {
             type: "DRAG_START",
             payload: {
-              cardId: payload.cardId,
+              cardIndex: payload.cardIndex,
             },
           });
 
