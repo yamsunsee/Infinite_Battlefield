@@ -9,7 +9,7 @@ import Icon from "../components/elements/Icon";
 const MainLayout = () => {
   const navigate = useNavigate();
   const {
-    state: { socket, form },
+    state: { socket, form, self, rival },
     dispatch,
   } = useStore();
   const [isCollapse, setIsCollapse] = useState(false);
@@ -24,6 +24,26 @@ const MainLayout = () => {
       },
     });
   }, []);
+
+  useEffect(() => {
+    socket?.emit("SERVER", {
+      type: "DRAG_START",
+      payload: {
+        roomId: form.roomId,
+        cardIndex: self.draggingCardIndex,
+      },
+    });
+  }, [self.draggingCardIndex]);
+
+  useEffect(() => {
+    socket?.emit("SERVER", {
+      type: "DRAG_OVER",
+      payload: {
+        roomId: form.roomId,
+        dropzoneId: rival.targetDropzoneId,
+      },
+    });
+  }, [rival.targetDropzoneId]);
 
   useEffect(() => {
     if (socket) {
@@ -51,6 +71,14 @@ const MainLayout = () => {
               type: "CHAT",
               payload: { type: "MESSAGE", ...payload },
             });
+            break;
+
+          case "DRAG_START":
+            dispatch({ type: "RIVAL_DRAGGING_CARD", payload: payload.cardIndex });
+            break;
+
+          case "DRAG_OVER":
+            dispatch({ type: "RIVAL_TARGET_DROPZONE", payload: payload.dropzoneId });
             break;
 
           default:

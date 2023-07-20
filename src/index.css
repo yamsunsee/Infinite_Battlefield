@@ -133,6 +133,6 @@
 
   .card_container.rival.selected > .frontside,
   .card_container.rival.flipped.selected > .backside {
-    @apply border-theme;
+    @apply border-rival;
   }
 }

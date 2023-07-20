@@ -1,6 +1,7 @@
 import { FC } from "react";
 import useStore from "../../hooks/useStore";
 import Card from "../elements/Card";
+import Line from "../elements/Line";
 
 const Rival: FC = () => {
   const {
@@ -12,6 +13,7 @@ const Rival: FC = () => {
       {rival.deck.map((cardId, index) => (
         <Card key={`${cardId}-${index}`} id={cardId} index={index} type="RIVAL" />
       ))}
+      <Line coordinates={[0, 0, 100, 100]} />
     </div>
   );
 };

@@ -62,16 +62,18 @@ export type State = {
   self: {
     deck: CardId[];
     wealth: number;
+    draggingCardIndex: number | null;
   };
   rival: {
     deck: CardId[];
     wealth: number;
+    draggingCardIndex: number | null;
+    targetDropzoneId: DropzoneId | null;
   };
   form: Form;
   room: Room;
   messages: Message[];
   socket: Socket | null;
-  draggingCard: CardId | null;
   cards: Record<CardId, Card>;
   elements: Record<ElementId, Element>;
   dropzones: Record<DropzoneId, Dropzone>;
@@ -84,7 +86,9 @@ export type Action =
   | { type: "CHAT"; payload: Message }
   | { type: "CLEAR_CHAT"; payload?: never }
   | { type: "SELF_DECK"; payload: number }
-  | { type: "DRAGGING_CARD"; payload: CardId }
+  | { type: "SELF_DRAGGING_CARD"; payload: number | null }
+  | { type: "RIVAL_DRAGGING_CARD"; payload: number | null }
+  | { type: "RIVAL_TARGET_DROPZONE"; payload: DropzoneId | null }
   | {
       type: "UPGRADE_DROPZONE";
       payload: { dropzoneId: DropzoneId; status: number };
@@ -147,4 +151,8 @@ export type CardProps = {
 
 export type DropzoneProps = {
   id: DropzoneId;
+};
+
+export type LineProps = {
+  coordinates: number[];
 };

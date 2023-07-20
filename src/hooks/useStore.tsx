@@ -5,10 +5,13 @@ const initialState: State = {
   self: {
     deck: ["C1", "C1", "C2", "C8", "C4", "C5", "C3", "C6", "C7", "C8"],
     wealth: 2000,
+    draggingCardIndex: null,
   },
   rival: {
     deck: ["C1", "C1", "C2", "C8", "C4", "C5", "C3", "C6", "C7", "C8"],
     wealth: 2000,
+    draggingCardIndex: null,
+    targetDropzoneId: null,
   },
   socket: null,
   form: {
@@ -21,7 +24,6 @@ const initialState: State = {
     players: [],
   },
   messages: [],
-  draggingCard: null,
   elements: {
     E0: {
       name: "Question_mark",
@@ -238,10 +240,22 @@ const storeReducer = (state: State, action: Action): State => {
         },
       };
 
-    case "DRAGGING_CARD":
+    case "SELF_DRAGGING_CARD":
       return {
         ...state,
-        draggingCard: payload,
+        self: {
+          ...state.self,
+          draggingCardIndex: payload,
+        },
+      };
+
+    case "RIVAL_DRAGGING_CARD":
+      return {
+        ...state,
+        rival: {
+          ...state.rival,
+          draggingCardIndex: payload,
+        },
       };
 
     case "UPGRADE_DROPZONE":
@@ -255,6 +269,15 @@ const storeReducer = (state: State, action: Action): State => {
             ...state.dropzones[dropzoneId],
             status: status,
           },
+        },
+      };
+
+    case "RIVAL_TARGET_DROPZONE":
+      return {
+        ...state,
+        rival: {
+          ...state.rival,
+          targetDropzoneId: payload,
         },
       };
 

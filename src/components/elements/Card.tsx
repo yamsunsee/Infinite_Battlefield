@@ -5,7 +5,7 @@ import Icon from "./Icon";
 
 const Card: FC<CardProps> = ({ id, index, type = "DEFAULT" }) => {
   const {
-    state: { cards },
+    state: { cards, rival },
     dispatch,
   } = useStore();
   const card = cards[id as CardId];
@@ -17,22 +17,23 @@ const Card: FC<CardProps> = ({ id, index, type = "DEFAULT" }) => {
         return `card_container self${isDragging ? " opacity-0" : ""}`;
 
       case "RIVAL":
-        return `card_container rival flipped`;
+        return `card_container rival flipped${index === rival.draggingCardIndex ? " selected" : ""}`;
 
       default:
         return "card_container";
     }
-  }, [type, isDragging]);
+  }, [type, isDragging, index, rival.draggingCardIndex]);
 
   const handleDragStart = (event: DragEvent<HTMLDivElement>) => {
     const string = JSON.stringify({ cardId: id, cardIndex: index });
 
     event.dataTransfer.setData("text/plain", string);
-    dispatch({ type: "DRAGGING_CARD", payload: id });
+    dispatch({ type: "SELF_DRAGGING_CARD", payload: index as number });
     setIsDragging(true);
   };
 
   const handleDragEnd = () => {
+    dispatch({ type: "SELF_DRAGGING_CARD", payload: null });
     setIsDragging(false);
   };
 
