@@ -14,6 +14,18 @@ const initialState: State = {
     targetDropzoneId: null,
   },
   socket: null,
+  rewards: {
+    R1: "Reward 01",
+    R2: "Reward 02",
+    R3: "Reward 03",
+    R4: "Reward 04",
+  },
+  punishments: {
+    P1: "Punishment 01",
+    P2: "Punishment 02",
+    P3: "Punishment 03",
+    P4: "Punishment 04",
+  },
   form: {
     serverUrl: "",
     playerName: "",
@@ -25,11 +37,6 @@ const initialState: State = {
   },
   messages: [],
   elements: {
-    E0: {
-      name: "Question_mark",
-      color: COLOR.GRAY,
-      deck: [],
-    },
     E1: {
       name: "Handyman",
       color: COLOR.GRAY,

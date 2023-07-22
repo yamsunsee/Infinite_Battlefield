@@ -109,6 +109,7 @@
     @apply translate-y-8 cursor-grab hover:z-10 hover:-translate-y-12 hover:scale-125;
   }
 
+  .card_container > .frontside,
   .card_container.self > .frontside {
     @apply hover:border-theme;
   }

@@ -15,7 +15,7 @@ type Player = {
   name: string;
 };
 
-export type ElementId = "E0" | "E1" | "E2" | "E3" | "E4" | "E5" | "E6";
+export type ElementId = "E1" | "E2" | "E3" | "E4" | "E5" | "E6";
 
 type Element = {
   name: string;
@@ -40,6 +40,10 @@ type Dropzone = {
   values: Partial<Record<CardId, number>>;
   allowedCardIds: Record<number, CardId[]>;
 };
+
+export type RewardId = "R1" | "R2" | "R3" | "R4";
+
+export type PunishmentId = "P1" | "P2" | "P3" | "P4";
 
 export type Room = {
   id: string;
@@ -70,6 +74,8 @@ export type State = {
     draggingCardIndex: number | null;
     targetDropzoneId: DropzoneId | null;
   };
+  rewards: Record<RewardId, string>;
+  punishments: Record<PunishmentId, string>;
   form: Form;
   room: Room;
   messages: Message[];

@@ -11,9 +11,9 @@ const Login = () => {
   const navigate = useNavigate();
   const { dispatch } = useStore();
   const [form, setForm] = useState<Form>({
-    serverUrl: "",
-    playerName: "",
-    roomId: "",
+    serverUrl: "http://localhost:5000",
+    playerName: "Yam",
+    roomId: "ABC123",
   });
   const [isLoading, setIsLoading] = useState(false);
   const serverUrlRef = useRef<HTMLInputElement>(null);
